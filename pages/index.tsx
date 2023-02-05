@@ -8,6 +8,7 @@ import {
 } from "@thirdweb-dev/react";
 import { CHARACTERS_ADDRESS } from "../const/contractAddresses";
 import { useRouter } from "next/router";
+import MintContainer from "../components/MintContainer";
 
 const Home: NextPage = () => {
     const editionDrop = useEditionDrop(CHARACTERS_ADDRESS);
