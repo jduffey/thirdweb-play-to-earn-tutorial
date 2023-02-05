@@ -1,10 +1,11 @@
+import Image from "next/image";
 import { NFT } from "@thirdweb-dev/sdk";
 import React from "react";
 import styles from "../styles/Gameplay.module.css";
 
 const SeaShell = (
     <div className={styles.slide}>
-        <img src="./seashell.png" height="48" width="48" alt="seashell" />
+    <Image src="/seashell.png" height="48" width="48" alt="seashell" />
     </div>
 );
 

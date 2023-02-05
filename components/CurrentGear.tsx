@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ThirdwebNftMedia, useAddress, useNFT } from "@thirdweb-dev/react";
 import { EditionDrop, NFT, SmartContract } from "@thirdweb-dev/sdk";
 import React, { useEffect, useState } from "react";
@@ -83,7 +84,7 @@ export default function CurrentGear({
                     marginTop: 24,
                 }}
             >
-                <img src="./octopus.png" height={64} width={64} alt="character-mining" />
+                <Image src="/octopus.png" height={64} width={64} alt="character-mining" />
                 <GameplayAnimation tool={tool} />
             </div>
         </div>

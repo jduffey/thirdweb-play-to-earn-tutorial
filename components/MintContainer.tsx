@@ -1,8 +1,9 @@
+import Image from "next/image";
 import React from "react";
 import {
     useAddress,
-    useClaimNFT,
-    useContract,
+    // useClaimNFT,
+    // useContract,
     Web3Button,
 } from "@thirdweb-dev/react";
 import { CHARACTERS_ADDRESS } from "../const/contractAddresses";
@@ -18,7 +19,7 @@ export default function MintContainer() {
             <p>Claim your Character NFT to start playing!</p>
 
             <div className={`${styles.nftBox} ${styles.spacerBottom}`}>
-                <img src="./octopus.png" style={{ height: 200 }} />
+                <Image src="/octopus.png" alt="octopus" style={{ height: 200 }} />
             </div>
 
             <div className={styles.smallMargin}>
