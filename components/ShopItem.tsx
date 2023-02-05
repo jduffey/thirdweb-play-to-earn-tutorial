@@ -21,18 +21,22 @@ export default function ShopItem({ item, toolsContract: toolsContract }: Props) 
     );
 
     return (
-        <div className={styles.nftBox} key={item.metadata.id.toString()}>
+        <div
+            className={styles.nftBox}
+            key={item.metadata.id.toString()}
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "250px" }}
+        >
             <ThirdwebNftMedia
                 metadata={item.metadata}
                 className={`${styles.nftMedia} ${styles.spacerTop}`}
-                height={"128"}
+                height={"150px"} width={"150px"}
             />
             <h3>{item.metadata.name}</h3>
             <p>
                 Price:{" "}
                 <b>
                     {claimCondition && ethers.utils.formatUnits(claimCondition?.price)}{" "}
-                    GEM
+                    SEASHL
                 </b>
             </p>
 

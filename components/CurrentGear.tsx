@@ -44,7 +44,8 @@ export default function CurrentGear({
     }, [address, miningContract, toolsContract]);
 
     return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", flexDirection: "column", textAlign: "center" }}>
+            <h2 style={{ color: "yellow" }}>{address}</h2>
             <h2 className={`${styles.noGapTop} `}>You and Your Tools</h2>
             <div
                 style={{
@@ -57,7 +58,7 @@ export default function CurrentGear({
                 {/* Currently equipped player */}
                 <div style={{ outline: "1px solid grey", borderRadius: 16 }}>
                     {playerNft && (
-                        <ThirdwebNftMedia metadata={playerNft?.metadata} height={"64"} />
+                        <ThirdwebNftMedia metadata={playerNft?.metadata} height={"150px"} width={"150px"} />
                     )}
                 </div>
                 {/* Currently equipped tool */}
@@ -66,7 +67,7 @@ export default function CurrentGear({
                 >
                     {tool && (
                         // @ts-ignore
-                        <ThirdwebNftMedia metadata={tool.metadata} height={"64"} />
+                        <ThirdwebNftMedia metadata={tool.metadata} height={"150px"} width={"150px"} />
                     )}
                 </div>
             </div>

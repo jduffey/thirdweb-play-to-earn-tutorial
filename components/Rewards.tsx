@@ -48,7 +48,7 @@ export default function Rewards({ miningContract, tokenContract }: Props) {
                 <ThirdwebNftMedia
                     // @ts-ignore
                     metadata={tokenMetadata}
-                    height={"48"}
+                    height={"150px"} width={"150px"}
                 />
             )}
             <p className={styles.noGapBottom}>
