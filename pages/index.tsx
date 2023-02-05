@@ -3,22 +3,24 @@ import styles from "../styles/Home.module.css";
 import {
     ConnectWallet,
     useAddress,
-    useEditionDrop,
+    useContract,
     useOwnedNFTs,
 } from "@thirdweb-dev/react";
 import { CHARACTERS_ADDRESS } from "../const/contractAddresses";
-import { useRouter } from "next/router";
 import MintContainer from "../components/MintContainer";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
-    const editionDrop = useEditionDrop(CHARACTERS_ADDRESS);
+    const { contract: editionDrop } = useContract(
+        CHARACTERS_ADDRESS,
+        "edition-drop"
+    );
 
     const address = useAddress();
-
     const router = useRouter();
 
     const {
-        data: ownedNFTs,
+        data: ownedNfts,
         isLoading,
         isError,
     } = useOwnedNFTs(editionDrop, address);
@@ -27,31 +29,23 @@ const Home: NextPage = () => {
     if (!address) {
         return (
             <div className={styles.container}>
-                <ConnectWallet />
+                <ConnectWallet colorMode="dark" />
             </div>
         );
     }
 
     // 1. Loading
     if (isLoading) {
-        return (
-            <div>
-                Loading...
-            </div>
-        );
+        return <div>Loading...</div>;
     }
 
-    // If something went wrong..
-    if (!ownedNFTs || isError) {
-        return (
-            <div>
-                Error
-            </div>
-        );
+    // Something went wrong
+    if (!ownedNfts || isError) {
+        return <div>Error</div>;
     }
 
-    // 2. If they don't own an NFT, show them the mint page
-    if (ownedNFTs.length === 0) {
+    // 2. No NFTs - mint page
+    if (ownedNfts.length === 0) {
         return (
             <div className={styles.container}>
                 <MintContainer />
@@ -59,19 +53,17 @@ const Home: NextPage = () => {
         );
     }
 
-    // 3. If they own an NFT, show them the NFT page
+    // 3. Has NFT already - show button to take to game
     return (
         <div className={styles.container}>
             <button
                 className={`${styles.mainButton} ${styles.spacerBottom}`}
-                onClick={() => router.push('/play')}
+                onClick={() => router.push(`/play`)}
             >
                 Play Game
             </button>
         </div>
     );
-
-
-}
+};
 
 export default Home;

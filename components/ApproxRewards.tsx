@@ -34,7 +34,7 @@ export default function ApproxRewards({ miningContract }: Props) {
             if (!address) return;
 
             const p = (await miningContract.call(
-                "playerPickaxe",
+                "playerTool",
                 address
             )) as ContractMappingResponse;
 

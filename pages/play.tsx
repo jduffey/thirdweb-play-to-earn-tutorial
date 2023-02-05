@@ -2,8 +2,6 @@ import {
     ConnectWallet,
     useAddress,
     useContract,
-    useEditionDrop,
-    useToken,
     // useMetamask,
 } from "@thirdweb-dev/react";
 import React from "react";
@@ -14,21 +12,21 @@ import Rewards from "../components/Rewards";
 import Shop from "../components/Shop";
 import {
     CHARACTERS_ADDRESS,
-    TOOLS_ADDRESS,
     SEA_SHELLS_ADDRESS,
     MINING_ADDRESS,
+    TOOLS_ADDRESS,
 } from "../const/contractAddresses";
 import styles from "../styles/Home.module.css";
 
 export default function Play() {
     const address = useAddress();
 
-    const { contract: miningContract } = useContract(MINING_ADDRESS, "mining");
+    const { contract: miningContract } = useContract(MINING_ADDRESS);
     const { contract: characterContract } = useContract(
         CHARACTERS_ADDRESS,
         "edition-drop"
     );
-    const { contract: toolsContract } = useContract(
+    const { contract: pickaxeContract } = useContract(
         TOOLS_ADDRESS,
         "edition-drop"
     );
@@ -47,12 +45,12 @@ export default function Play() {
             {miningContract &&
                 characterContract &&
                 tokenContract &&
-                toolsContract ? (
+                pickaxeContract ? (
                 <div className={styles.mainSection}>
                     <CurrentGear
                         miningContract={miningContract}
                         characterContract={characterContract}
-                        pickaxeContract={toolsContract}
+                        pickaxeContract={pickaxeContract}
                     />
                     <Rewards
                         miningContract={miningContract}
@@ -65,10 +63,10 @@ export default function Play() {
 
             <hr className={`${styles.divider} ${styles.bigSpacerTop}`} />
 
-            {toolsContract && miningContract ? (
+            {pickaxeContract && miningContract ? (
                 <>
                     <h2 className={`${styles.noGapTop} ${styles.noGapBottom}`}>
-                        Your Owned Tools
+                        Your Owned Pickaxes
                     </h2>
                     <div
                         style={{
@@ -82,7 +80,7 @@ export default function Play() {
                         }}
                     >
                         <OwnedGear
-                            pickaxeContract={toolsContract}
+                            pickaxeContract={pickaxeContract}
                             miningContract={miningContract}
                         />
                     </div>
@@ -93,7 +91,7 @@ export default function Play() {
 
             <hr className={`${styles.divider} ${styles.bigSpacerTop}`} />
 
-            {toolsContract && tokenContract ? (
+            {pickaxeContract && tokenContract ? (
                 <>
                     <h2 className={`${styles.noGapTop} ${styles.noGapBottom}`}>Shop</h2>
                     <div
@@ -107,7 +105,7 @@ export default function Play() {
                             marginTop: 8,
                         }}
                     >
-                        <Shop pickaxeContract={toolsContract} />
+                        <Shop pickaxeContract={pickaxeContract} />
                     </div>
                 </>
             ) : (
