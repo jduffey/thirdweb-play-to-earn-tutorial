@@ -52,13 +52,17 @@ export default function OwnedGear({ toolsContract: toolsContract, miningContract
 
     return (
         <>
-            <div className={styles.nftBoxGrid}>
+            <div
+                className={styles.nftBoxGrid}
+                style={{ display: "flex", flexDirection: "column", textAlign: "center" }}
+            >
                 {ownedTools?.map((p) => (
-                    <div className={styles.nftBox} key={p.metadata.id.toString()}>
+                    <div className={styles.nftBox} key={p.metadata.id.toString()} >
                         <ThirdwebNftMedia
                             metadata={p.metadata}
                             className={`${styles.nftMedia} ${styles.spacerTop}`}
-                            height={"64"}
+                            width="150px"
+                            height="150px"
                         />
                         <h3>{p.metadata.name}</h3>
 
