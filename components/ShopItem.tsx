@@ -10,13 +10,13 @@ import { TOOLS_ADDRESS } from "../const/contractAddresses";
 import styles from "../styles/Home.module.css";
 
 type Props = {
-    pickaxeContract: EditionDrop;
+    toolsContract: EditionDrop;
     item: NFT;
 };
 
-export default function ShopItem({ item, pickaxeContract }: Props) {
+export default function ShopItem({ item, toolsContract: toolsContract }: Props) {
     const { data: claimCondition } = useActiveClaimCondition(
-        pickaxeContract,
+        toolsContract,
         item.metadata.id
     );
 

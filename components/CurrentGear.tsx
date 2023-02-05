@@ -8,23 +8,23 @@ import styles from "../styles/Home.module.css";
 type Props = {
     miningContract: SmartContract<any>;
     characterContract: EditionDrop;
-    pickaxeContract: EditionDrop;
+    toolsContract: EditionDrop;
 };
 
 /**
  * This component shows the:
  * - Currently equipped miner character (right now there is just one (token ID 0))
- * - Currently equipped character's pickaxe
+ * - Currently equipped character's tool
  */
 export default function CurrentGear({
     miningContract,
     characterContract,
-    pickaxeContract,
+    toolsContract: toolsContract,
 }: Props) {
     const address = useAddress();
 
     const { data: playerNft } = useNFT(characterContract, 0);
-    const [pickaxe, setPickaxe] = useState<NFT>();
+    const [tool, setTool] = useState<NFT>();
 
     useEffect(() => {
         (async () => {
@@ -35,17 +35,17 @@ export default function CurrentGear({
                 address
             )) as ContractMappingResponse;
 
-            // Now we have the tokenId of the equipped pickaxe, if there is one, fetch the metadata for it
+            // Now we have the tokenId of the equipped tool, if there is one, fetch the metadata for it
             if (p.isData) {
-                const pickaxeMetadata = await pickaxeContract.get(p.value);
-                setPickaxe(pickaxeMetadata);
+                const toolMetadata = await toolsContract.get(p.value);
+                setTool(toolMetadata);
             }
         })();
-    }, [address, miningContract, pickaxeContract]);
+    }, [address, miningContract, toolsContract]);
 
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
-            <h2 className={`${styles.noGapTop} `}>Equipped Items</h2>
+            <h2 className={`${styles.noGapTop} `}>You and Your Tools</h2>
             <div
                 style={{
                     display: "flex",
@@ -60,13 +60,13 @@ export default function CurrentGear({
                         <ThirdwebNftMedia metadata={playerNft?.metadata} height={"64"} />
                     )}
                 </div>
-                {/* Currently equipped pickaxe */}
+                {/* Currently equipped tool */}
                 <div
                     style={{ outline: "1px solid grey", borderRadius: 16, marginLeft: 8 }}
                 >
-                    {pickaxe && (
+                    {tool && (
                         // @ts-ignore
-                        <ThirdwebNftMedia metadata={pickaxe.metadata} height={"64"} />
+                        <ThirdwebNftMedia metadata={tool.metadata} height={"64"} />
                     )}
                 </div>
             </div>
@@ -83,7 +83,7 @@ export default function CurrentGear({
                 }}
             >
                 <img src="./octopus.png" height={64} width={64} alt="character-mining" />
-                <GameplayAnimation pickaxe={pickaxe} />
+                <GameplayAnimation tool={tool} />
             </div>
         </div>
     );

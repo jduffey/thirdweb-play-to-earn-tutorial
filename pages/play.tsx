@@ -26,7 +26,7 @@ export default function Play() {
         CHARACTERS_ADDRESS,
         "edition-drop"
     );
-    const { contract: pickaxeContract } = useContract(
+    const { contract: toolsContract } = useContract(
         TOOLS_ADDRESS,
         "edition-drop"
     );
@@ -45,12 +45,12 @@ export default function Play() {
             {miningContract &&
                 characterContract &&
                 tokenContract &&
-                pickaxeContract ? (
+                toolsContract ? (
                 <div className={styles.mainSection}>
                     <CurrentGear
                         miningContract={miningContract}
                         characterContract={characterContract}
-                        pickaxeContract={pickaxeContract}
+                        toolsContract={toolsContract}
                     />
                     <Rewards
                         miningContract={miningContract}
@@ -63,10 +63,10 @@ export default function Play() {
 
             <hr className={`${styles.divider} ${styles.bigSpacerTop}`} />
 
-            {pickaxeContract && miningContract ? (
+            {toolsContract && miningContract ? (
                 <>
                     <h2 className={`${styles.noGapTop} ${styles.noGapBottom}`}>
-                        Your Owned Pickaxes
+                        Your Owned Tools
                     </h2>
                     <div
                         style={{
@@ -80,7 +80,7 @@ export default function Play() {
                         }}
                     >
                         <OwnedGear
-                            pickaxeContract={pickaxeContract}
+                            toolsContract={toolsContract}
                             miningContract={miningContract}
                         />
                     </div>
@@ -91,7 +91,7 @@ export default function Play() {
 
             <hr className={`${styles.divider} ${styles.bigSpacerTop}`} />
 
-            {pickaxeContract && tokenContract ? (
+            {toolsContract && tokenContract ? (
                 <>
                     <h2 className={`${styles.noGapTop} ${styles.noGapBottom}`}>Shop</h2>
                     <div
@@ -105,7 +105,7 @@ export default function Play() {
                             marginTop: 8,
                         }}
                     >
-                        <Shop pickaxeContract={pickaxeContract} />
+                        <Shop toolsContract={toolsContract} />
                     </div>
                 </>
             ) : (

@@ -4,17 +4,17 @@ import styles from "../styles/Gameplay.module.css";
 
 const SeaShell = (
     <div className={styles.slide}>
-        <img src="./seashell.png" height="48" width="48" alt="gold-gem" />
+        <img src="./seashell.png" height="48" width="48" alt="seashell" />
     </div>
 );
 
 type Props = {
-    pickaxe: NFT | undefined;
+    tool: NFT | undefined;
 };
 
-export default function GameplayAnimation({ pickaxe }: Props) {
-    if (!pickaxe) {
-        return <div style={{ marginLeft: 8 }}>I need a pickaxe!</div>;
+export default function GameplayAnimation({ tool: tool }: Props) {
+    if (!tool) {
+        return <div style={{ marginLeft: 8 }}>I need a tool!</div>;
     }
 
     return (

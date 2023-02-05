@@ -5,22 +5,22 @@ import styles from "../styles/Home.module.css";
 import ShopItem from "./ShopItem";
 
 type Props = {
-    pickaxeContract: EditionDrop;
+    toolsContract: EditionDrop;
 };
 
 /**
  * This component shows the:
- * - All of the available pickaxes from the edition drop and their price.
+ * - All of the available tools from the edition drop and their price.
  */
-export default function Shop({ pickaxeContract }: Props) {
-    const { data: availablePickaxes } = useNFTs(pickaxeContract);
+export default function Shop({ toolsContract: toolsContract }: Props) {
+    const { data: availableTools } = useNFTs(toolsContract);
 
     return (
         <>
             <div className={styles.nftBoxGrid}>
-                {availablePickaxes?.map((p) => (
+                {availableTools?.map((p) => (
                     <ShopItem
-                        pickaxeContract={pickaxeContract}
+                        toolsContract={toolsContract}
                         item={p}
                         key={p.metadata.id.toString()}
                     />

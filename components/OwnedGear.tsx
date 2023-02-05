@@ -11,19 +11,19 @@ import styles from "../styles/Home.module.css";
 import { MINING_ADDRESS } from "../const/contractAddresses";
 
 type Props = {
-    pickaxeContract: EditionDrop;
+    toolsContract: EditionDrop;
     miningContract: SmartContract<any>;
 };
 
 /**
  * This component shows the:
- * - Pickaxes the connected wallet has
+ * - Tools the connected wallet has
  * - A stake button underneath each of them to equip it
  */
-export default function OwnedGear({ pickaxeContract, miningContract }: Props) {
+export default function OwnedGear({ toolsContract: toolsContract, miningContract }: Props) {
     const address = useAddress();
-    const { data: ownedPickaxes, isLoading } = useOwnedNFTs(
-        pickaxeContract,
+    const { data: ownedTools, isLoading } = useOwnedNFTs(
+        toolsContract,
         address
     );
 
@@ -34,14 +34,14 @@ export default function OwnedGear({ pickaxeContract, miningContract }: Props) {
     async function equip(id: string) {
         if (!address) return;
 
-        // The contract requires approval to be able to transfer the pickaxe
-        const hasApproval = await pickaxeContract.isApproved(
+        // The contract requires approval to be able to transfer the tool
+        const hasApproval = await toolsContract.isApproved(
             address,
             MINING_ADDRESS
         );
 
         if (!hasApproval) {
-            await pickaxeContract.setApprovalForAll(MINING_ADDRESS, true);
+            await toolsContract.setApprovalForAll(MINING_ADDRESS, true);
         }
 
         await miningContract.call("stake", id);
@@ -53,7 +53,7 @@ export default function OwnedGear({ pickaxeContract, miningContract }: Props) {
     return (
         <>
             <div className={styles.nftBoxGrid}>
-                {ownedPickaxes?.map((p) => (
+                {ownedTools?.map((p) => (
                     <div className={styles.nftBox} key={p.metadata.id.toString()}>
                         <ThirdwebNftMedia
                             metadata={p.metadata}
