@@ -56,12 +56,20 @@ export default function ApproxRewards({ miningContract }: Props) {
         return () => clearInterval(interval);
     }, [amount, everyMillisecondAmount]);
 
+    const earnedThisSessionText = Number(ethers.utils.formatEther((amount * multiplier).toFixed(0))).toFixed(18);
+    const leadingNumber = earnedThisSessionText.split(".")[0];
+    const firstFourDigits = earnedThisSessionText.split(".")[1].substring(0, 4);
+    const secondFourDigits = earnedThisSessionText.split(".")[1].substring(4, 8);
+    const thirdFourDigits = earnedThisSessionText.split(".")[1].substring(8, 12);
+    const finalSixDigits = earnedThisSessionText.split(".")[1].substring(12, 18);
+    const earnedThisSessionDisplay = `${leadingNumber}.${firstFourDigits} ${secondFourDigits} ${thirdFourDigits} ${finalSixDigits}`;
+
     return (
-        <p style={{ width: 370, overflow: "hidden" }}>
-            Earned this session:{" "}
-            <b>
-                {ethers.utils.formatEther((amount * multiplier).toFixed(0)) ||
-                    "Error..."}
+        <p style={{ width: 370, overflow: "hidden", textAlign: "center" }}>
+            Earned this session
+            <br />
+            <b style={{ fontFamily: "monospace", fontSize: "18px" }}>
+                {earnedThisSessionDisplay || "Error..."}
             </b>
         </p>
     );
