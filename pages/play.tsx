@@ -41,7 +41,7 @@ export default function Play() {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.background} ${styles.container}`}>
             {miningContract &&
                 characterContract &&
                 tokenContract &&
