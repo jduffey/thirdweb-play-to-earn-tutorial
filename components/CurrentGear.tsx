@@ -46,7 +46,7 @@ export default function CurrentGear({
 
     return (
         <div style={{ display: "flex", flexDirection: "column", textAlign: "center" }}>
-            <h2 style={{ color: "yellow" }}>{address}</h2>
+            <h2 style={{ color: "yellow", border: "1px solid #ccc", borderRadius: "16px", padding: "12px", background: "#050607" }}>{address}</h2>
             <h2 className={`${styles.noGapTop} `}>You and Your Tools</h2>
             <div
                 style={{
@@ -57,13 +57,16 @@ export default function CurrentGear({
                 }}
             >
                 {/* Currently equipped player */}
-                <div style={{ outline: "1px solid grey", borderRadius: 16 }}>
+                <div
+                    className={styles.nftBox}
+                    style={{ outline: "1px solid grey", borderRadius: 16 }}>
                     {playerNft && (
                         <ThirdwebNftMedia metadata={playerNft?.metadata} height={"150px"} width={"150px"} />
                     )}
                 </div>
                 {/* Currently equipped tool */}
                 <div
+                    className={styles.nftBox}
                     style={{ outline: "1px solid grey", borderRadius: 16, marginLeft: 8 }}
                 >
                     {tool && (
@@ -76,11 +79,12 @@ export default function CurrentGear({
             {/* Gameplay Animation */}
 
             <div
+                className={styles.animationContainer}
                 style={{
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "space-evenly",
                     marginTop: 24,
                 }}
             >

@@ -231,6 +231,12 @@
     }
 }
 
+.animationContainer {
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    background: #050607;
+}
+
 .nftBoxGrid {
     width: 1200px;
     max-width: 95vw;
@@ -246,8 +252,7 @@
 .nftBox {
     border-radius: 16px;
     border: 1px solid #ccc;
-    width: 19%;
-    min-height: 200px;
+    background: #050607;
 }
 
 /* Between 1200 and 800 */
